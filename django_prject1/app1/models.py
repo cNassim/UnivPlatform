@@ -2,7 +2,7 @@ from django.db import models
 
 class Agent(models.Model):
     id_agent = models.IntegerField(primary_key=True)
-    Nom = models.CharField(max_length=50)
+    Nom = models.CharField(max_length=51)
     Prenom = models.CharField(max_length=50)
     Email = models.EmailField(max_length=50)
     password = models.CharField(max_length=50)
