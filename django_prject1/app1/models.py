@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models 
 
 class Agent(models.Model):
     id_agent = models.IntegerField(primary_key=True)
