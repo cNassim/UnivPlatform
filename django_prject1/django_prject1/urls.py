@@ -14,7 +14,7 @@ urlpatterns = [
     path('etudiant/', views.etudiant, name='etudiant'),
     path('candidature/', views.candidature, name='candidature'),
     path('suivis/', views.suivis, name="suivis"),
-    path('', include('account.urls')), 
+    path('', include('account.urls')),
     path('login', sing_in, name='sing_in'),
     path('register', sing_up, name='sing_up'),
     path('logout', log_out, name='log_out'),

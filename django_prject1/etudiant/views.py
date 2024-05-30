@@ -11,10 +11,10 @@ from django.core.mail import EmailMessage
 
 def home(request):
     return render(request, 'home.html')
-
+@login_required(login_url='sing_in')
 def candidature(request):
     return render(request, 'candidature.html')
-
+@login_required(login_url='sing_in')
 def suivis(request):
     return render(request, 'suivis.html')
 def sing_in(request):
