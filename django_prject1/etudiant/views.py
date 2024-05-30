@@ -13,3 +13,4 @@ def candidature(request):
 
 def suivis(request):
     return render(request, 'suivis.html')
+
