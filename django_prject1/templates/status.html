@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statut de l'Étudiant</title>
+    <link rel="stylesheet" href="{% static 'agent_styles.css' }">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="student-info.html">Informations de l'Étudiant</a>
+        <a href="universities.html">Universités Ciblées</a>
+        <a href="status.html">Statut de l'Étudiant</a>
+        <a href="updates.html">Historique des Mises à Jour</a>
+        <a href="actions.html">Actions à Entreprendre</a>
+    </nav>
+    <div class="container">
+        <h1>Statut de l'Étudiant</h1>
+        <div class="status">
+            <h2>Statut de l'Étudiant</h2>
+            <p><strong>Étape actuelle :</strong> <span id="current-step"></span></p>
+            <p><strong>Date de dernière mise à jour :</strong> <span id="last-update"></span></p>
+            <p><strong>Prochaine étape :</strong> <span id="next-step"></span></p>
+            <p><strong>Remarques supplémentaires :</strong> <span id="additional-notes"></span></p>
+        </div>
+    </div>
+    <script src="{%static 'agent_script.js' }"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historique des Mises à Jour</title>
+    <link rel="stylesheet" href="{% static 'agent_styles.css' }">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="student-info.html">Informations de l'Étudiant</a>
+        <a href="universities.html">Universités Ciblées</a>
+        <a href="status.html">Statut de l'Étudiant</a>
+        <a href="updates.html">Historique des Mises à Jour</a>
+        <a href="actions.html">Actions à Entreprendre</a>
+    </nav>
+    <div class="container">
+        <h1>Historique des Mises à Jour</h1>
+        <div class="updates">
+            <h2>Historique des Mises à Jour</h2>
+            <table id="updates-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Mise à Jour</th>
+                        <th>Commentaires</th>
+                    </tr>
+                </thead>
+                <tbody id="updates-body">
+                    <!-- Contenu rempli par JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="{% static 'scripts.js' }"></script>
+</body>
+</html>

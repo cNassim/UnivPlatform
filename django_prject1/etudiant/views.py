@@ -35,8 +35,8 @@ def candidature(request):
             Date_de_naissance=Date2naissance,
             Nationalité=Nationalité,
             CIN=Cin,
-            id_pays_id="1",
-            photo='test'
+            photo='test',
+            id_agent = '2',
         )
         new_candidature.save()
 

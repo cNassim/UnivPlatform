@@ -7,6 +7,9 @@ from etudiant.views import (
     sing_in, sing_up, log_out,
     forgot_password
 )
+from agent.views import (
+    dashboard,status,actions , info , univ , updates
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -19,7 +22,12 @@ urlpatterns = [
     path('register', sing_up, name='sing_up'),
     path('logout', log_out, name='log_out'),
     path('forgot-password', forgot_password, name='forgot_password'),
-
+    path('dashboard',dashboard,name='dashboard'),
+    path('status',status,name='status'),
+    path('univ',univ,name='univ'),
+    path('updates',updates,name='updates'),
+    path('actions',actions,name='actions'),
+    path('info',info,name="info")
 ]
 
 

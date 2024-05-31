@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universités Ciblées</title>
+    <link rel="stylesheet" href="{% static 'agent_styles.css' }">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="student-info.html">Informations de l'Étudiant</a>
+        <a href="universities.html">Universités Ciblées</a>
+        <a href="status.html">Statut de l'Étudiant</a>
+        <a href="updates.html">Historique des Mises à Jour</a>
+        <a href="actions.html">Actions à Entreprendre</a>
+    </nav>
+    <div class="container">
+        <h1>Universités Ciblées</h1>
+        <div class="universities">
+            <h2>Universités Ciblées</h2>
+            <table id="universities-table">
+                <thead>
+                    <tr>
+                        <th>Nom de l'Université</th>
+                        <th>Pays</th>
+                        <th>Programme</th>
+                        <th>Date de Candidature</th>
+                        <th>Statut de la Candidature</th>
+                        <th>Remarques</th>
+                    </tr>
+                </thead>
+                <tbody id="universities-body">
+                    <!-- Contenu rempli par JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="{%static 'agent_script.js'}"></script>
+</body>
+</html>
