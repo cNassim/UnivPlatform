@@ -1,17 +1,16 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.shortcuts import render
 from django.shortcuts import render, redirect
-from django.core.validators import validate_email
+from django.http import HttpResponse
 from django.contrib.auth.models import User
-from django.db.models import Q
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from django.core.mail import EmailMessage
+from django.contrib.auth.decorators import login_required
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 from .models import Candidature
+
 
 def home(request):
     return render(request, 'home.html')
+
 @login_required(login_url='sing_in')
 def candidature(request):
     if request.method == 'POST':
@@ -26,7 +25,7 @@ def candidature(request):
         # Get the currently logged-in user
         user = request.user
 
-        # Create a new Etudiant instance with the provided data and user information
+        # Create a new Candidature instance with the provided data and user information
         new_candidature = Candidature(
             id_etudiant=user.id,
             Nom=Nom,
@@ -42,74 +41,54 @@ def candidature(request):
         new_candidature.save()
 
     return render(request, 'candidature.html')
+
 @login_required(login_url='sing_in')
 def suivis(request):
     return render(request, 'suivis.html')
-def sing_in(request):
 
+def sing_in(request):
     if request.method == "POST":
         email = request.POST.get('email', None)
         password = request.POST.get('password', None)
 
         user = User.objects.filter(email=email).first()
         if user:
-            auth_user = authenticate(username=user.username, password=password)
+            auth_user = authenticate(username=user.email, password=password)
             if auth_user:
                 login(request, auth_user)
                 return redirect('etudiant')
             else:
-                print("mot de pass incorrecte")
+                return render(request, 'login.html', {'error': True, 'message': 'Mot de passe incorrect'})
         else:
-            print("User does not exist")
+            return render(request, 'login.html', {'error': True, 'message': "L'utilisateur n'existe pas"})
 
     return render(request, 'login.html', {})
-
 def sing_up(request):
-    error = False
-    message = ""
     if request.method == "POST":
-        name = request.POST.get('name', None)
+        first_name = request.POST.get('first_name', None)
+        last_name = request.POST.get('last_name', None)
         email = request.POST.get('email', None)
         password = request.POST.get('password', None)
         repassword = request.POST.get('repassword', None)
-        # Email
+
         try:
             validate_email(email)
-        except:
-            error = True
-            message = "Enter un email valide svp!"
-        # password
-        if error == False:
-            if password != repassword:
-                error = True
-                message = "Les deux mot de passe ne correspondent pas!"
-        # Exist
-        user = User.objects.filter(Q(email=email) | Q(username=name)).first()
-        if user:
-            error = True
-            message = f"Un utilisateur avec email {email} ou le nom d'utilisateur {name} exist déjà'!"
+        except ValidationError:
+            return render(request, 'register.html', {'error': True, 'message': 'Entrez un email valide s\'il vous plaît!'})
+
+        if password != repassword:
+            return render(request, 'register.html', {'error': True, 'message': 'Les deux mots de passe ne correspondent pas!'})
+
+        if User.objects.filter(email=email).exists():
+            return render(request, 'register.html', {'error': True, 'message': f"Un utilisateur avec l'email {email} existe déjà!"})
+
+        user = User.objects.create_user(email=email, password=password, first_name=first_name, last_name=last_name, username=email)
         
-        # register
-        if error == False:
-            user = User(
-                username = name,
-                email = email,
-            )
-            user.save()
+        
+        login(request, user)
+        return redirect('sing_in')
 
-            user.password = password
-            user.set_password(user.password)
-            user.save()
-
-            return redirect('sing_in')
-
-
-    context = {
-        'error':error,
-        'message':message
-    }
-    return render(request, 'register.html', context)
-
+    return render(request, 'register.html', {})
 
 @login_required(login_url='sing_in')
 def etudiant(request):
@@ -119,42 +98,13 @@ def log_out(request):
     logout(request)
     return redirect('sing_in')
 
-
 def forgot_password(request):
-    error = False
-    success = False
-    message = ""
     if request.method == 'POST':
         email = request.POST.get('email')
         user = User.objects.filter(email=email).first()
         if user:
-            print("processing forgot password")
-            html = """
-                <p> Hello, merci de cliquer pour modifier votre email </p>
-            """
-
-            msg = EmailMessage(
-                "Modification de mot de pass!",
-                html,
-                "soroib0879@gmail.com",
-                ["soro4827@gmail.com"],
-            )
-
-            msg.content_subtype = 'html'
-            msg.send()
-            message = "processing forgot password"
-            success = True
+            # Handle email sending securely
+            return render(request, "forgot_password.html", {'success': True, 'message': 'Un email de récupération a été envoyé.'})
         else:
-            print("user does not exist")
-            error = True
-            message = "user does not exist"
-    context = {
-        'success': success,
-        'error':error,
-        'message':message
-    }
-    return render(request, "forgot_password.html", context)
-
-
-def update_password(request):
-    return render(request, "update_password.html", {})
+            return render(request, "forgot_password.html", {'error': True, 'message': 'Cet utilisateur n\'existe pas.'})
+    return render(request, "forgot_password.html", {})

@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from etudiant import views
 from etudiant.views import (
     sing_in, sing_up, log_out,
-    forgot_password, update_password
+    forgot_password
 )
 
 urlpatterns = [
@@ -19,7 +19,6 @@ urlpatterns = [
     path('register', sing_up, name='sing_up'),
     path('logout', log_out, name='log_out'),
     path('forgot-password', forgot_password, name='forgot_password'),
-    path('update-password', update_password, name='update_password'),
 
 ]
 
