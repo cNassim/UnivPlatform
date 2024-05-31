@@ -8,7 +8,7 @@ from etudiant.views import (
     forgot_password
 )
 from agent.views import (
-    dashboard,status,actions , info , univ , updates
+    dashboard,status, info , univ ,
 )
 
 urlpatterns = [
@@ -25,8 +25,6 @@ urlpatterns = [
     path('dashboard',dashboard,name='dashboard'),
     path('status',status,name='status'),
     path('univ',univ,name='univ'),
-    path('updates',updates,name='updates'),
-    path('actions',actions,name='actions'),
     path('info',info,name='info')
 ]
 

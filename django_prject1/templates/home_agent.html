@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil - Gestion des Inscriptions</title>
-    <link rel="stylesheet" href="{% static 'agent_styles.css' } ">
+    <link rel="stylesheet" href="{% static 'agent_styles.css' %} ">
 </head>
 <body>
     <nav>
-        <a href="index.html">Accueil</a>
+        <a href="{% url 'dashboard' %}">Accueil</a>
         <a href="student-info.html">Informations de l'Étudiant</a>
         <a href="universities.html">Universités Ciblées</a>
         <a href="status.html">Statut de l'Étudiant</a>
