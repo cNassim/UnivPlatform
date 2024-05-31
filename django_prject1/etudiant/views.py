@@ -8,11 +8,39 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import EmailMessage
+from .models import Etudiant
 
 def home(request):
     return render(request, 'home.html')
 @login_required(login_url='sing_in')
 def candidature(request):
+    if request.method == 'POST':
+        Nom = request.POST['Nom']
+        Prenom = request.POST['Prenom']
+        Email = request.POST['email']
+        Lettre2motivation = request.POST['lettre_de_motivation']
+        Date2naissance = request.POST['date_de_naissance']
+        Nationalité = request.POST['nationalité']
+        Cin = request.POST['CIN']
+        
+        # Get the currently logged-in user
+        user = request.user
+
+        # Create a new Etudiant instance with the provided data and user information
+        new_candidature = Etudiant(
+            id_etudiant=user.id,
+            Nom=Nom,
+            Prenom=Prenom,
+            Email=Email,
+            password=user.password,
+            Date_de_naissance=Date2naissance,
+            Nationalité=Nationalité,
+            CIN=Cin,
+            id_pays_id="1",
+            photo='test'
+        )
+        new_candidature.save()
+
     return render(request, 'candidature.html')
 @login_required(login_url='sing_in')
 def suivis(request):

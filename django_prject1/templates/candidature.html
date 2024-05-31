@@ -340,7 +340,9 @@
             <!-- CTA -->
 
             <!-- General elements -->
-            <div
+            <form class="mx-1 mx-md-4" action="{% url 'candidature' %}" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div
               class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
             >
               <div class="flex space-x-4">
@@ -350,7 +352,8 @@
                     <input
                       class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-input focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                       placeholder="{{user.first_name}}"
-                    />
+                      name="Nom"
+                      required/>
                   </label>
                 </div>
                 <div class="flex-1">
@@ -359,7 +362,8 @@
                     <input
                       class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-input focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                       placeholder="{{user.last_name}}"
-                    />
+                      name="Prenom"
+                      required/>
                   </label>
                 </div>
               </div>
@@ -373,7 +377,9 @@
                   <input
                     class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
                     placeholder="{{user.email}}"
-                  />
+                    input="email"
+                    name="email"
+                    required/>
                   <div
                     class="absolute inset-y-0 flex items-center ml-3 pointer-events-none"
                   >
@@ -395,11 +401,13 @@
                 </div>
               </label>
               <label class="block mt-4 text-sm">
-                <span class="text-gray-700 dark:text-gray-400">Message</span>
+                <span class="text-gray-700 dark:text-gray-400">Lettre de motivation</span>
                 <textarea
                   class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                   rows="3"
                   placeholder=""
+                  name="lettre_de_motivation"
+                  required
                 ></textarea>
               </label>
               <div class="flex space-x-4 mt-4">
@@ -408,7 +416,9 @@
                     <span class="text-gray-700 dark:text-gray-400">Date de naissance</span>
                     <input
                       class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-input focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                      type="datetime-local"
+                      type="date"
+                      name="date_de_naissance"
+                      required
                     />
                   </label>
                 </div>
@@ -417,8 +427,8 @@
                     <span class="text-gray-700 dark:text-gray-400">
                       Nationalité
                     </span>
-                    <select id="country" name="country" class="form-control block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-                      <option value="None"><--SELECT--></option>
+                    <select id="country" name="nationalité" class="form-control block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" required>
+                      <option value="" disabled selected><--SELECT--></option>
                       <option value="Afghanistan">Afghanistan</option>
                       <option value="Åland Islands">Åland Islands</option>
                       <option value="Albania">Albania</option>
@@ -672,10 +682,11 @@
                 <input
                   class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-input focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                   placeholder="W#####"
+                  name="CIN"
+                  required
                 />
               </label>
             </div>
-
             <!-- Validation inputs -->
             <h4
                 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
@@ -689,11 +700,12 @@
                 <div class="flex-1">
                   <label class="block  text-sm">
                     <span class="text-gray-700 dark:text-gray-400">
-                      Requested Limit
+                      Universités
                     </span>
                     <select
-                      class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                    >
+                      name="u1" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                    required>
+                      <option value="" disabled selected><--SELECT--></option>
                       <option>$1,000</option>
                       <option>$5,000</option>
                       <option>$10,000</option>
@@ -704,11 +716,12 @@
                 <div class="flex-1">
                   <label class="block  text-sm">
                     <span class="text-gray-700 dark:text-gray-400">
-                      Requested Limit
+                      Formations
                     </span>
                     <select
-                      class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                    >
+                      name="s1" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                      required>
+                      <option value="" disabled selected><--SELECT--></option>
                       <option>$1,000</option>
                       <option>$5,000</option>
                       <option>$10,000</option>
@@ -730,11 +743,12 @@
               <div class="flex-1">
                 <label class="block  text-sm">
                   <span class="text-gray-700 dark:text-gray-400">
-                    Requested Limit
+                    Universités
                   </span>
                   <select
-                    class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                  >
+                  name="u2" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                  required>
+                  <option value="" disabled selected><--SELECT--></option>
                     <option>$1,000</option>
                     <option>$5,000</option>
                     <option>$10,000</option>
@@ -745,11 +759,12 @@
               <div class="flex-1">
                 <label class="block  text-sm">
                   <span class="text-gray-700 dark:text-gray-400">
-                    Requested Limit
+                    Formations
                   </span>
                   <select
-                    class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                  >
+                  name="s2" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                  required>
+                  <option value="" disabled selected><--SELECT--></option>
                     <option>$1,000</option>
                     <option>$5,000</option>
                     <option>$10,000</option>
@@ -771,11 +786,12 @@
             <div class="flex-1">
               <label class="block  text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
-                  Requested Limit
+                  Universités
                 </span>
                 <select
-                  class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                >
+                name="u3" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                required>
+                <option value="" disabled selected><--SELECT--></option>
                   <option>$1,000</option>
                   <option>$5,000</option>
                   <option>$10,000</option>
@@ -786,11 +802,12 @@
             <div class="flex-1">
               <label class="block  text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
-                  Requested Limit
+                  Formations
                 </span>
                 <select
-                  class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                >
+                name="s3" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                required>
+                <option value="" disabled selected><--SELECT--></option>
                   <option>$1,000</option>
                   <option>$5,000</option>
                   <option>$10,000</option>
@@ -812,11 +829,12 @@
           <div class="flex-1">
             <label class="block  text-sm">
               <span class="text-gray-700 dark:text-gray-400">
-                Requested Limit
+                Universités
               </span>
               <select
-                class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-              >
+              name="u4" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+              required>
+              <option value="" disabled selected><--SELECT--></option>
                 <option>$1,000</option>
                 <option>$5,000</option>
                 <option>$10,000</option>
@@ -827,11 +845,12 @@
           <div class="flex-1">
             <label class="block  text-sm">
               <span class="text-gray-700 dark:text-gray-400">
-                Requested Limit
+                Formations
               </span>
               <select
-                class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-              >
+              name="s4" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+              required>
+              <option value="" disabled selected><--SELECT--></option>
                 <option>$1,000</option>
                 <option>$5,000</option>
                 <option>$10,000</option>
@@ -853,11 +872,12 @@
         <div class="flex-1">
           <label class="block  text-sm">
             <span class="text-gray-700 dark:text-gray-400">
-              Requested Limit
+              Universités
             </span>
             <select
-              class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-            >
+            name="u5" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+            required>
+            <option value="" disabled selected><--SELECT--></option>
               <option>$1,000</option>
               <option>$5,000</option>
               <option>$10,000</option>
@@ -868,11 +888,12 @@
         <div class="flex-1">
           <label class="block  text-sm">
             <span class="text-gray-700 dark:text-gray-400">
-              Requested Limit
+              Formations
             </span>
             <select
-              class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-            >
+            name="s5" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+            required>
+            <option value="" disabled selected><--SELECT--></option>
               <option>$1,000</option>
               <option>$5,000</option>
               <option>$10,000</option>
@@ -894,11 +915,12 @@
       <div class="flex-1">
         <label class="block  text-sm">
           <span class="text-gray-700 dark:text-gray-400">
-            Requested Limit
+            Universités
           </span>
           <select
-            class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-          >
+          name="u6" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+          required>
+          <option value="" disabled selected><--SELECT--></option>
             <option>$1,000</option>
             <option>$5,000</option>
             <option>$10,000</option>
@@ -909,11 +931,12 @@
       <div class="flex-1">
         <label class="block  text-sm">
           <span class="text-gray-700 dark:text-gray-400">
-            Requested Limit
+            Formations
           </span>
           <select
-            class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-          >
+          name="s6" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+          required>
+            <option value="" disabled selected><--SELECT--></option>
             <option>$1,000</option>
             <option>$5,000</option>
             <option>$10,000</option>
@@ -935,11 +958,12 @@
     <div class="flex-1">
       <label class="block  text-sm">
         <span class="text-gray-700 dark:text-gray-400">
-          Requested Limit
+          Universités
         </span>
         <select
-          class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-        >
+        name="u7" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+        required>
+        <option value="" disabled selected><--SELECT--></option>
           <option>$1,000</option>
           <option>$5,000</option>
           <option>$10,000</option>
@@ -950,11 +974,12 @@
     <div class="flex-1">
       <label class="block  text-sm">
         <span class="text-gray-700 dark:text-gray-400">
-          Requested Limit
+          Formations
         </span>
         <select
-          class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-        >
+        name="s7" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+        required>
+        <option value="" disabled selected><--SELECT--></option>
           <option>$1,000</option>
           <option>$5,000</option>
           <option>$10,000</option>
@@ -976,11 +1001,12 @@
   <div class="flex-1">
     <label class="block  text-sm">
       <span class="text-gray-700 dark:text-gray-400">
-        Requested Limit
+        Universités
       </span>
       <select
-        class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-      >
+      name="u8" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+      required>
+      <option value="" disabled selected><--SELECT--></option>
         <option>$1,000</option>
         <option>$5,000</option>
         <option>$10,000</option>
@@ -991,11 +1017,12 @@
   <div class="flex-1">
     <label class="block  text-sm">
       <span class="text-gray-700 dark:text-gray-400">
-        Requested Limit
+        Formations
       </span>
       <select
-        class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-      >
+      name="s8" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+      required>
+      <option value="" disabled selected><--SELECT--></option>
         <option>$1,000</option>
         <option>$5,000</option>
         <option>$10,000</option>
@@ -1008,9 +1035,11 @@
             <div class="flex justify-center">
     <button
       class=" px-5 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-    >
+      type="submit"
+      >
       Soumettre
     </button>
+  </form>
             </div>
           </div>
         </main>
