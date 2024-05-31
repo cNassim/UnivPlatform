@@ -8,7 +8,7 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import EmailMessage
-from .models import Etudiant
+from .models import Candidature
 
 def home(request):
     return render(request, 'home.html')
@@ -27,7 +27,7 @@ def candidature(request):
         user = request.user
 
         # Create a new Etudiant instance with the provided data and user information
-        new_candidature = Etudiant(
+        new_candidature = Candidature(
             id_etudiant=user.id,
             Nom=Nom,
             Prenom=Prenom,
