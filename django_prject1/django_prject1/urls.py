@@ -27,7 +27,7 @@ urlpatterns = [
     path('univ',univ,name='univ'),
     path('updates',updates,name='updates'),
     path('actions',actions,name='actions'),
-    path('info',info,name="info")
+    path('info',info,name='info')
 ]
 
 
