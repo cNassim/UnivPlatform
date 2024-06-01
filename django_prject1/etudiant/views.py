@@ -81,7 +81,8 @@ def candidature(request):
 
 @login_required(login_url='sing_in')
 def suivis(request):
-    return render(request, 'suivis.html')
+    candidatures = Candidature.objects.all()
+    return render(request, 'suivis.html',{'candidatures' : candidatures})
 
 def sing_in(request):
     if request.method == "POST":
@@ -120,8 +121,7 @@ def sing_up(request):
             return render(request, 'register.html', {'error': True, 'message': f"Un utilisateur avec l'email {email} existe déjà!"})
 
         user = User.objects.create_user(email=email, password=password, first_name=first_name, last_name=last_name, username=email)
-        
-        
+
         login(request, user)
         return redirect('sing_in')
 

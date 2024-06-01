@@ -72,5 +72,18 @@ class Candidature(models.Model):
     status7 = models.CharField(max_length=50, default='pending')
     status8 = models.CharField(max_length=50, default='pending')
     id_agent = models.IntegerField()
+    def get_universities_and_formations(self):
+        data = []
+        for i in range(1, 9):
+            universite = getattr(self, f'universite{i}', None)
+            formation = getattr(self, f'formation{i}', None)
+            status = getattr(self, f'status{i}', None)
+            if universite and formation:
+                data.append({
+                    'universite': universite,
+                    'formation': formation,
+                    'status': status
+                })
+        return data
     def _str_(self):
         return f"Candidature {self.id_candidature}"
