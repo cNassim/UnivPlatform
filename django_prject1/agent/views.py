@@ -8,4 +8,4 @@ def status(request):
 def info(request):
     return render(request, 'student-info.html')
 def univ(request):
-    return render(request, 'universities.html')
+    return render(request, 'universitie.html')
