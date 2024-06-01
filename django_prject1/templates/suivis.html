@@ -134,7 +134,7 @@
         <div class="py-4 text-gray-500 dark:text-gray-400">
           <a
             class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
-            href="#"
+            href="{% url 'etudiant' %}"
           >
             E-CAMPUS
           </a>
@@ -361,58 +361,61 @@
                   </thead>
                   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                     {% for candidature in candidatures %}
-                      {% for data in candidature.get_universities_and_formations %}
-                        <tr class="text-gray-700 dark:text-gray-400">
-                          <td class="px-4 py-3">
-                            <div class="flex items-center text-sm">
-                              <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                <img
-                                  class="object-cover w-full h-full rounded-full"
-                                  src="https://i.pinimg.com/736x/a1/52/5a/a1525aa2c74d1eb05bf1f41234727bcf.jpg"
-                                  alt=""
-                                  loading="lazy"
-                                />
-                                <div
-                                  class="absolute inset-0 rounded-full shadow-inner"
-                                  aria-hidden="true"
-                                ></div>
-                              </div>
-                              <div>
-                                <p class="font-semibold">{{ data.universite }}</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="px-4 py-3 text-sm">
-                            {{ data.formation }}
-                          </td>
-                          <td class="px-4 py-3 text-xs">
-                            {% if data.status == 'approved' %}
-                              <span
-                                class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
-                              >
-                                Approved
-                              </span>
-                            {% elif data.status == 'pending' %}
-                              <span
-                                class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600"
-                              >
-                                Pending
-                              </span>
-                            {% elif data.status == 'denied' %}
-                              <span
-                                class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"
-                              >
-                                Denied
-                              </span>
-                            {% endif %}
-                          </td>
-                          <td class="px-4 py-3 text-sm">
-                            {{ candidature.Date_de_soumission }}
-                          </td>
-                        </tr>
-                      {% endfor %}
+                        {% if candidature.id_etudiant == user.id %}
+                            {% for data in candidature.get_universities_and_formations %}
+                                <tr class="text-gray-700 dark:text-gray-400">
+                                    <td class="px-4 py-3">
+                                        <div class="flex items-center text-sm">
+                                            <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                                                <img
+                                                    class="object-cover w-full h-full rounded-full"
+                                                    src="https://i.pinimg.com/736x/a1/52/5a/a1525aa2c74d1eb05bf1f41234727bcf.jpg"
+                                                    alt=""
+                                                    loading="lazy"
+                                                />
+                                                <div
+                                                    class="absolute inset-0 rounded-full shadow-inner"
+                                                    aria-hidden="true"
+                                                ></div>
+                                            </div>
+                                            <div>
+                                                <p class="font-semibold">{{ data.universite }}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">
+                                        {{ data.formation }}
+                                    </td>
+                                    <td class="px-4 py-3 text-xs">
+                                        {% if data.status == 'approved' %}
+                                            <span
+                                                class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+                                            >
+                                                Approved
+                                            </span>
+                                        {% elif data.status == 'pending' %}
+                                            <span
+                                                class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600"
+                                            >
+                                                Pending
+                                            </span>
+                                        {% elif data.status == 'denied' %}
+                                            <span
+                                                class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"
+                                            >
+                                                Denied
+                                            </span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">
+                                        {{ candidature.Date_de_soumission }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
                     {% endfor %}
-                  </tbody>
+                </tbody>
+                
                 </table>
               </div>
             </div>

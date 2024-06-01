@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from .models import Candidature
+from superadmin.models import Université,Formation
 
 
 def home(request):
@@ -13,6 +14,11 @@ def home(request):
 
 @login_required(login_url='sing_in')
 def candidature(request):
+
+    candidatures = Candidature.objects.all()
+    user_candidatures = candidatures.filter(id_etudiant=request.user.id)
+    Universités = Université.objects.all()
+    Formations = Formation.objects.all()
     if request.method == 'POST':
         Nom = request.POST['Nom']
         Prenom = request.POST['Prenom']
@@ -77,7 +83,7 @@ def candidature(request):
         )
         new_candidature.save()
 
-    return render(request, 'candidature.html')
+    return render(request, 'candidature.html',{'user_candidatures': user_candidatures,'Universités': Universités, 'Formations': Formations})
 
 @login_required(login_url='sing_in')
 def suivis(request):
