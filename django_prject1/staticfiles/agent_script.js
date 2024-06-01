@@ -16,12 +16,11 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     // Statut de l'étudiant
-    const status = {
-        currentStep: "Préparation des documents pour le visa",
-        lastUpdate: "20/05/2024",
-        nextStep: "Prendre rendez-vous pour le visa",
-        additionalNotes: "Contacter l'université de Sydney pour confirmer la bourse"
-    };
+    const studentStatus = [
+        { name: "Université de Toronto", program: "Ingénierie", status: "En attente", remarks: "-" },
+        { name: "Université de Sydney", program: "Biotechnologie", status: "Acceptée", remarks: "Bourse offerte" },
+        { name: "Université de Tokyo", program: "Sciences de l'Informatique", status: "Rejetée", remarks: "-" }
+    ];
 
     // Remplir les informations de l'étudiant
     if (document.getElementById('student-name')) {
@@ -46,10 +45,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Remplir le statut de l'étudiant
-    if (document.getElementById('current-step')) {
-        document.getElementById('current-step').textContent = status.currentStep;
-        document.getElementById('last-update').textContent = status.lastUpdate;
-        document.getElementById('next-step').textContent = status.nextStep;
-        document.getElementById('additional-notes').textContent = status.additionalNotes;
+  if (document.getElementById('studentStatus-body')) {
+        const studentStatusBody = document.getElementById('studentStatus-body');
+        studentStatus.forEach(status => {
+            let row = document.createElement('tr');
+            row.innerHTML = `<td>${status.name}</td>
+                             <td>${status.program}</td>
+                             <td>${status.status}</td>
+                             <td>${status.remarks}</td>`;
+            studentStatusBody.appendChild(row);
+        });
     }
 });

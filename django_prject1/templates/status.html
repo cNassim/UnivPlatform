@@ -2,29 +2,35 @@
 {% load static %}
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Statut de l'Étudiant</title>
-    <link rel="stylesheet" href="{% static 'agent_styles.css' %}">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Statut de l'Étudiant</title>
+ <link rel="stylesheet" href="{% static 'agent_styles.css' %}">
 </head>
 <body>
-    <nav>
-        <a href="{% url 'dashboard' %}">Accueil</a>
-        <a href="{% url 'info' %}">Informations de l'Étudiant</a>
-        <a href="{% url 'univ' %}">Universités Ciblées</a>
-        <a href="{% url 'status' %}">Statut de l'Étudiant</a>
-        
-    </nav>
-    <div class="container">
-        <h1>Statut de l'Étudiant</h1>
-        <div class="status">
-            <h2>Statut de l'Étudiant</h2>
-            <p><strong>Étape actuelle :</strong> <span id="current-step"></span></p>
-            <p><strong>Date de dernière mise à jour :</strong> <span id="last-update"></span></p>
-            <p><strong>Prochaine étape :</strong> <span id="next-step"></span></p>
-            <p><strong>Remarques supplémentaires :</strong> <span id="additional-notes"></span></p>
-        </div>
-    </div>
-    <script src="{%static 'agent_script.js' %}"></script>
+ <nav>
+ <a href="{% url 'dashboard' %}">Accueil</a>
+ <a href="{% url 'info' %}">Informations de l'Étudiant</a>
+ <a href="{% url 'univ' %}">Universités Ciblées</a>
+ <a href="{% url 'status' %}">Statut de l'Étudiant</a>
+
+ </nav>
+ <div class="container">
+ <h1>Statut de l'Étudiant</h1>
+ <table id="studentStatus-table">
+ <thead>
+ <tr>
+ <th>Nom de l'Université</th>
+ <th>Programme</th>
+ <th>Statut</th>
+ <th>Remarques</th>
+ </tr>
+ </thead>
+ <tbody id="studentStatus-body">
+ <!-- Contenu rempli par JavaScript -->
+ </tbody>
+ </table>
+ </div>
+ <script src="{%static 'agent_script.js' %}"></script>
 </body>
 </html>
