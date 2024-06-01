@@ -10,11 +10,10 @@
 <body>
     <nav>
         <a href="{% url 'dashboard' %}">Accueil</a>
-        <a href="student-info.html">Informations de l'Étudiant</a>
-        <a href="universities.html">Universités Ciblées</a>
-        <a href="status.html">Statut de l'Étudiant</a>
-        <a href="updates.html">Historique des Mises à Jour</a>
-        <a href="actions.html">Actions à Entreprendre</a>
+        <a href="{% url 'info' %}">Informations de l'Étudiant</a>
+        <a href="{% url 'univ' %}">Universités Ciblées</a>
+        <a href="{% url 'status' %}">Statut de l'Étudiant</a>
+
     </nav>
     <div class="container">
         <h1>Bienvenue à la Gestion des Inscriptions des Étudiants</h1>
