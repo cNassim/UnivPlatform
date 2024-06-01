@@ -27,7 +27,6 @@ class Formation(models.Model):
     id_formation = models.AutoField(primary_key=True)
     Nom = models.CharField(max_length=50)
     Description = models.CharField(max_length=50)
-    id_université = models.IntegerField()
 
     def _str_(self):
         return self.Nom
