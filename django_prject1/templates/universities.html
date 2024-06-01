@@ -13,7 +13,6 @@
         <a href="{% url 'info' %}">Informations de l'Étudiant</a>
         <a href="{% url 'univ' %}">Universités Ciblées</a>
         <a href="{% url 'status' %}">Statut de l'Étudiant</a>
-
     </nav>
     <div class="container">
         <h1>Universités Ciblées</h1>
@@ -26,8 +25,6 @@
                         <th>Pays</th>
                         <th>Programme</th>
                         <th>Date de Candidature</th>
-                        <th>Statut de la Candidature</th>
-                        <th>Remarques</th>
                     </tr>
                 </thead>
                 <tbody id="universities-body">
@@ -36,6 +33,6 @@
             </table>
         </div>
     </div>
-    <script src="{%static 'agent_script.js' %}"></script>
+    <script src="{% static 'agent_script.js' %}"></script>
 </body>
 </html>
