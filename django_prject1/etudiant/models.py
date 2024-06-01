@@ -40,7 +40,7 @@ class Candidature(models.Model):
     Nom = models.CharField(max_length=50)
     Prenom = models.CharField(max_length=50)
     Email = models.EmailField(max_length=50)
-    password = models.CharField(max_length=50)
+    password = models.CharField(max_length=500)
     Date_de_naissance = models.DateField()
     Nationalité = models.CharField(max_length=50)
     CIN = models.CharField(max_length=50)

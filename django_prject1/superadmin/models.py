@@ -18,7 +18,6 @@ class Université(models.Model):
     Numero_de_telephone = models.CharField(max_length=50)
     adresse = models.CharField(max_length=50)
     pays = models.CharField(max_length=200)
-    photo = models.ImageField(upload_to='univers_photos/', null=True, blank=True)
     siteweb = models.URLField(max_length=200, null=True, blank=True)
 
     def _str_(self):
