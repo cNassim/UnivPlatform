@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Étudiants</title>
+    <title>Informations de l'Étudiant</title>
     <link rel="stylesheet" href="{% static 'agent_styles.css' %}">
 </head>
 <body>
@@ -15,14 +15,14 @@
         <a href="{% url 'status' %}">Statut de l'Étudiant</a>
     </nav>
     <div class="container">
-        <h1>Liste des Étudiants pour l'agent {{ agent.name }}</h1>
-        <div class="student-list">
-            {% for student in students %}
-            <div class="student">
-                <p><strong>Nom de l'étudiant :</strong> {{ student.name }}</p>
-                <a href="{% url 'student-detail' student_id=student.id %}"><button>View</button></a>
-            </div>
-            {% endfor %}
+        <h1>Informations de l'Étudiant</h1>
+        <div class="student-info">
+            <h2>Informations de l'Étudiant</h2>
+            <p><strong>Nom de l'étudiant :</strong> {{ student.name }}</p>
+            <p><strong>Date de naissance :</strong> {{ student.date_of_birth }}</p>
+            <p><strong>Numéro d'identification étudiant :</strong> {{ student.student_id }}</p>
+            <p><strong>Email :</strong> {{ student.email }}</p>
+            <p><strong>Téléphone :</strong> {{ student.phone }}</p>
         </div>
     </div>
     <script src="{% static 'agent_script.js' %}"></script>

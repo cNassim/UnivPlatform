@@ -2,37 +2,43 @@
 {% load static %}
 <html lang="fr">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Universités Ciblées</title>
- <link rel="stylesheet" href="{% static 'agent_styles.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universités Ciblées</title>
+    <link rel="stylesheet" href="{% static 'agent_styles.css' %}">
 </head>
 <body>
- <nav>
- <a href="{% url 'dashboard' %}">Accueil</a>
- <a href="{% url 'info' %}">Informations de l'Étudiant</a>
- <a href="{% url 'univ' %}">Universités Ciblées</a>
- <a href="{% url 'status' %}">Statut de l'Étudiant</a>
- </nav>
- <div class="container">
- <h1>Universités Ciblées</h1>
- <div class="universities">
- <h2>Universités Ciblées</h2>
- <table id="universities-table">
- <thead>
- <tr>
- <th>Nom de l'Université</th>
- <th>Pays</th>
- <th>Programme</th>
- <th>Date de Candidature</th>
- </tr>
- </thead>
- <tbody id="universities-body">
- <!-- Contenu rempli par JavaScript -->
- </tbody>
- </table>
- </div>
- </div>
- <script src="{% static 'agent_script.js' %}"></script>
+    <nav>
+        <a href="{% url 'dashboard' %}">Accueil</a>
+        <a href="{% url 'student-list' %}">Informations de l'Étudiant</a>
+        <a href="{% url 'targeted-universities' %}">Universités Ciblées</a>
+        <a href="{% url 'status' %}">Statut de l'Étudiant</a>
+    </nav>
+    <div class="container">
+        <h1>Universités Ciblées</h1>
+        <form method="get" action="{% url 'targeted-universities' %}">
+            <label for="student">Sélectionnez un étudiant :</label>
+            <select name="student" id="student" onchange="this.form.submit()">
+                <option value="">Sélectionnez un étudiant</option>
+                {% for student in students %}
+                    <option value="{{ student.id }}" {% if selected_student and student.id == selected_student.id %}selected{% endif %}>
+                        {{ student.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+
+        {% if selected_student %}
+        <h2>Universités choisies par {{ selected_student.name }}</h2>
+        <ul>
+            {% for university in universities %}
+            <li>{{ university.name }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>Veuillez sélectionner un étudiant pour voir les universités choisies.</p>
+        {% endif %}
+    </div>
+    <script src="{% static 'agent_script.js' %}"></script>
 </body>
 </html>

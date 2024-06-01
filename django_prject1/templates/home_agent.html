@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil - Gestion des Inscriptions</title>
-    <link rel="stylesheet" href="{% static 'agent_styles.css' %} ">
+    <link rel="stylesheet" href="{% static 'agent_styles.css' %}">
 </head>
 <body>
     <nav>
@@ -13,11 +13,14 @@
         <a href="{% url 'info' %}">Informations de l'Étudiant</a>
         <a href="{% url 'univ' %}">Universités Ciblées</a>
         <a href="{% url 'status' %}">Statut de l'Étudiant</a>
-
     </nav>
     <div class="container">
         <h1>Bienvenue à la Gestion des Inscriptions des Étudiants</h1>
-        <p>Utilisez le menu pour naviguer entre les différentes sections.</p>
+        <h2>Informations de l'Agent</h2>
+        <p>Nom : {{ agent.nom }}</p>
+        <p>Prénom : {{ agent.prenom }}</p>
+        <p>Email : {{ agent.email }}</p>
+        <p>Téléphone : {{ agent.telephone }}</p>
     </div>
 </body>
 </html>
