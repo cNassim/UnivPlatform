@@ -21,7 +21,25 @@ def candidature(request):
         Date2naissance = request.POST['date_de_naissance']
         Nationalité = request.POST['nationalité']
         Cin = request.POST['CIN']
-        
+        bac= request.FILES['Baclo']
+        bultinbac= request.FILES['Bulletin_BAC']
+        pic = request.FILES['photo']
+        un1=request.POST['u1']
+        fo1=request.POST['s1']
+        un2=request.POST['u2']
+        fo2=request.POST['s2']
+        un3=request.POST['u3']
+        fo3=request.POST['s3']
+        un4=request.POST['u4']
+        fo4=request.POST['s4']
+        un5=request.POST['u5']
+        fo5=request.POST['s5']
+        un6=request.POST['u6']
+        fo6=request.POST['s6']
+        un7=request.POST['u7']
+        fo7=request.POST['s7']
+        un8=request.POST['u8']
+        fo8=request.POST['s8']
         # Get the currently logged-in user
         user = request.user
 
@@ -32,11 +50,30 @@ def candidature(request):
             Prenom=Prenom,
             Email=Email,
             password=user.password,
+            Lettre_de_motivation = Lettre2motivation,
             Date_de_naissance=Date2naissance,
             Nationalité=Nationalité,
             CIN=Cin,
-            photo='test',
+            BAC = bac,
+            note_BAC = bultinbac,
+            photo=pic,
             id_agent = '2',
+            universite1=un1,
+            formation1=fo1,
+            universite2=un2,
+            formation2=fo2,
+            universite3=un3,
+            formation3=fo3,
+            universite4=un4,
+            formation4=fo4,
+            universite5=un5,
+            formation5=fo5,
+            universite6=un6,
+            formation6=fo6,
+            universite7=un7,
+            formation7=fo7,
+            universite8=un8,
+            formation8=fo8
         )
         new_candidature.save()
 
