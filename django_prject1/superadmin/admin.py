@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Agent, Université, Formation
-from etudiant import Candidature 
+from etudiant.models import Candidature 
 
 class AgentAdmin(admin.ModelAdmin):
     list_display = ('id_agent', 'Nom', 'Prenom', 'Email', 'Telephone')
