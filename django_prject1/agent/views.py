@@ -8,7 +8,10 @@ def dashboard(request):
     agents = Agent.objects.all()
     return render(request, 'home_agent.html',{'agents' : agents})
 def status(request):
-    return render(request, 'status.html')
+    user = request.user
+    agent = Agent.objects.get(Email=request.user.email)
+    candidatures = Candidature.objects.filter(id_agent=agent.id_agent)
+    return render(request, 'status.html',{'agent': agent, 'candidatures': candidatures})
 @login_required
 def info(request):
     user = request.user
@@ -28,6 +31,3 @@ def student_list(request):
 @login_required
 def student_detail(request):
     return render(request, 'student_detail.html')
-@login_required
-def targeted_universities(request):
-    return render(request, 'universities.html')

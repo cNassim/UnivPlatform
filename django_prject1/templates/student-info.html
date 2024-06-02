@@ -11,7 +11,7 @@
     <nav>
         <a href="{% url 'dashboard' %}">Accueil</a>
         <a href="{% url 'student-list' %}">Informations de l'Étudiant</a>
-        <a href="{% url 'univ' %}">Universités Ciblées</a>
+        
         <a href="{% url 'status' %}">Statut de l'Étudiant</a>
     </nav>
     <div class="container">
@@ -20,8 +20,19 @@
             {% for candidature in candidatures %}
                 {% if agent.id == candidature.agent_id %}
                     <div class="student">
+                        <p><strong>Photo de l'étudiant :</strong></p>
+                        <img src="{{ candidature.photo.url }}" alt="Logo HubSpot" width=30% height=30%/></p>
                         <p><strong>Nom de l'étudiant :</strong> {{ candidature.Nom }}</p>
-                        <a href="#"><button>View</button></a>
+                        <p><strong>Prenom de l'étudiant :</strong> {{ candidature.Prenom }}</p>
+                        <p><strong>Email de l'étudiant :</strong> {{ candidature.Email }}</p>
+                        <p><strong>Date de naissance de l'étudiant :</strong> {{ candidature.Date_de_naissance }}</p>
+                        <p><strong>Nationalité de l'étudiant :</strong> {{ candidature.Nationalité }}</p>
+                        <p><strong>CIN de l'étudiant :</strong> {{ candidature.CIN }}</p>
+                        <p><strong>Lettre de motivation de l'étudiant :</strong> {{ candidature.Lettre_de_motivation }}</p>
+                        <p><strong>BAC de l'étudiant :</strong></p>
+                            <img src="{{ candidature.BAC.url }}" alt="Logo HubSpot" width=30% height=30%/></p>
+                        <p><strong>Bulletin du  de l'étudiant :</strong></p>
+                                <img src="{{ candidature.note_BAC.url }}" alt="Logo HubSpot" width=30% height=30%/></p>
                     </div>
                 {% endif %}
             {% endfor %}

@@ -11,9 +11,7 @@
  <nav>
  <a href="{% url 'dashboard' %}">Accueil</a>
  <a href="{% url 'info' %}">Informations de l'Étudiant</a>
- <a href="{% url 'univ' %}">Universités Ciblées</a>
  <a href="{% url 'status' %}">Statut de l'Étudiant</a>
-
  </nav>
  <div class="container">
  <h1>Statut de l'Étudiant</h1>
@@ -23,14 +21,27 @@
  <th>Nom de l'Université</th>
  <th>Programme</th>
  <th>Statut</th>
- <th>Remarques</th>
  </tr>
  </thead>
- <tbody id="studentStatus-body">
- <!-- Contenu rempli par JavaScript -->
+ <tbody>
+    {% for candidature in candidatures %}
+        {% for data in candidature.get_universities_and_formations %}
+            <tr>
+                <td>{{ data.universite }}</td>
+                <td>{{ data.formation }}</td>
+                <td>
+                    <select name="status">
+                        <option value="{{data.status}}" disabled selected>{{data.status}}</option>
+                        <option value="approved">Approved</option>
+                        <option value="denied">Denied</option>
+                    </select>
+                </td>
+            </tr>
+        {% endfor %}
+    {% endfor %}
  </tbody>
  </table>
  </div>
- <script src="{%static 'agent_script.js' %}"></script>
+ <script src="{% static 'agent_script.js' %}"></script>
 </body>
 </html>
