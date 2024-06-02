@@ -3,7 +3,6 @@ from django.urls import path, include
 
 from account.views import (
     sing_in, sing_up, log_out,
-    forgot_password
 )
 urlpatterns = [
     path('login', sing_in, name='sing_in'),

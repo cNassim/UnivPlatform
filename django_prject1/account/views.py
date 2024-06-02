@@ -69,13 +69,3 @@ def log_out(request):
     logout(request)
     return redirect('sing_in')
 
-def forgot_password(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        user = User.objects.filter(email=email).first()
-        if user:
-            # Handle email sending securely
-            return render(request, "forgot_password.html", {'success': True, 'message': 'Un email de récupération a été envoyé.'})
-        else:
-            return render(request, "forgot_password.html", {'error': True, 'message': 'Cet utilisateur n\'existe pas.'})
-    return render(request, "forgot_password.html", {})

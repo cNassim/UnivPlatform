@@ -31,7 +31,15 @@ class Formation(models.Model):
     def _str_(self):
         return self.Nom
 
+from django.db import models
+
 class Candidature(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('accepted', 'Accepted'),
+        ('refused', 'Refused'),
+    ]
+
     id_candidature = models.AutoField(primary_key=True)
     id_etudiant = models.IntegerField()
     photo = models.ImageField(upload_to='media/', null=True, blank=True)
@@ -47,7 +55,7 @@ class Candidature(models.Model):
     BAC = models.ImageField(upload_to='media/', null=True, blank=True)
     note_BAC = models.ImageField(upload_to='media/', null=True, blank=True)
     universite1 = models.CharField(max_length=250, null=True, blank=True)
-    formation2 = models.CharField(max_length=250, null=True, blank=True)
+    formation1 = models.CharField(max_length=250, null=True, blank=True)
     universite2 = models.CharField(max_length=250, null=True, blank=True)
     formation2 = models.CharField(max_length=250, null=True, blank=True)
     universite3 = models.CharField(max_length=250, null=True, blank=True)
@@ -55,20 +63,21 @@ class Candidature(models.Model):
     universite4 = models.CharField(max_length=250, null=True, blank=True)
     formation4 = models.CharField(max_length=250, null=True, blank=True)
     universite5 = models.CharField(max_length=250, null=True, blank=True)
-    formation5= models.CharField(max_length=250, null=True, blank=True)
+    formation5 = models.CharField(max_length=250, null=True, blank=True)
     universite6 = models.CharField(max_length=250, null=True, blank=True)
     formation6 = models.CharField(max_length=250, null=True, blank=True)
     universite7 = models.CharField(max_length=250, null=True, blank=True)
     formation7 = models.CharField(max_length=250, null=True, blank=True)
     universite8 = models.CharField(max_length=250, null=True, blank=True)
     formation8 = models.CharField(max_length=250, null=True, blank=True)
-    status1 = models.CharField(max_length=50, default='pending')
-    status2 = models.CharField(max_length=50, default='pending')
-    status3 = models.CharField(max_length=50, default='pending')
-    status4 = models.CharField(max_length=50, default='pending')
-    status5 = models.CharField(max_length=50, default='pending')
-    status6 = models.CharField(max_length=50, default='pending')
-    status7 = models.CharField(max_length=50, default='pending')
-    status8 = models.CharField(max_length=50, default='pending')
-    def _str_(self):
+    status1 = models.CharField(max_length=50, choices=STATUS_CHOICES, default='pending')
+    status2 = models.CharField(max_length=50, choices=STATUS_CHOICES, default='pending')
+    status3 = models.CharField(max_length=50, choices=STATUS_CHOICES, default='pending')
+    status4 = models.CharField(max_length=50, choices=STATUS_CHOICES, default='pending')
+    status5 = models.CharField(max_length=50, choices=STATUS_CHOICES, default='pending')
+    status6 = models.CharField(max_length=50, choices=STATUS_CHOICES, default='pending')
+    status7 = models.CharField(max_length=50, choices=STATUS_CHOICES, default='pending')
+    status8 = models.CharField(max_length=50, choices=STATUS_CHOICES, default='pending')
+
+    def __str__(self):
         return f"Candidature {self.id_candidature}"
