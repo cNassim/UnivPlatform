@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.core.mail import EmailMessage
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from superadmin.models import Agent
 
 
 
@@ -19,13 +20,19 @@ def sing_in(request):
             auth_user = authenticate(username=user.email, password=password)
             if auth_user:
                 login(request, auth_user)
-                return redirect('etudiant')
+                # Vérifier si l'utilisateur authentifié est un agent
+                try:
+                    agent = Agent.objects.get(Email=email)
+                    return redirect('dashboard')
+                except Agent.DoesNotExist:
+                    return redirect('etudiant')
             else:
                 return render(request, 'login.html', {'error': True, 'message': 'Mot de passe incorrect'})
         else:
             return render(request, 'login.html', {'error': True, 'message': "L'utilisateur n'existe pas"})
 
     return render(request, 'login.html', {})
+
 
 
 def sing_up(request):

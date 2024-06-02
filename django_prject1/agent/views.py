@@ -1,60 +1,33 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from .models import Agent , Student
+from etudiant.models import Candidature
+from superadmin.models import Agent
 from django.shortcuts import render, get_object_or_404
 # Create your views here.
 def dashboard(request):
- return render(request, 'home_agent.html')
+    agents = Agent.objects.all()
+    return render(request, 'home_agent.html',{'agents' : agents})
 def status(request):
- return render(request, 'status.html')
+    return render(request, 'status.html')
+@login_required
 def info(request):
- return render(request, 'student-info.html')
+    user = request.user
+    # Récupérer l'agent connecté
+    agent = Agent.objects.get(Email=request.user.email)
+    # Filtrer les candidatures liées à cet agent
+    candidatures = Candidature.objects.filter(id_agent=agent.id_agent)
+    return render(request, 'student-info.html',{'agent': agent, 'candidatures': candidatures})
 def univ(request):
- return render(request, 'universities.html')
-
-
+    return render(request, 'universities.html')
 @login_required
 def home_agent(request):
- # Retrieve the agent corresponding to the logged-in user
- agent = Agent.objects.get(email=request.user.email)
- return render(request, 'home_agent.html', {'agent': agent})
-def info(request):
- # Your logic to retrieve information about the student or agent
- return render(request, 'student-info.html') 
-#==================================
+    return render(request, 'home_agent.html')
 @login_required
 def student_list(request):
-    agent = get_object_or_404(Agent, user=request.user)  # Assume agent is related to the logged-in user
-    students = Student.objects.filter(agent=agent)
-    context = {
-        'students': students,
-        'agent': agent,
-    }
-    return render(request, 'student-info.html', context)
-
+    return render(request, 'student-info.html')
 @login_required
-def student_detail(request, student_id):
-    student = get_object_or_404(Student, id=student_id)
-    context = {
-        'student': student,
-    }
-    return render(request, 'student_detail.html', context)
-#=======================================
+def student_detail(request):
+    return render(request, 'student_detail.html')
 @login_required
 def targeted_universities(request):
-    agent = get_object_or_404(Agent, user=request.user)
-    students = Student.objects.filter(agent=agent)
-    selected_student_id = request.GET.get('student')
-    selected_student = None
-    universities = None
-
-    if selected_student_id:
-        selected_student = get_object_or_404(Student, id=selected_student_id)
-        universities = selected_student.universities.all()[:8]  # Assuming a many-to-many relationship
-
-    context = {
-        'students': students,
-        'selected_student': selected_student,
-        'universities': universities,
-    }
-    return render(request, 'universities.html', context)
+    return render(request, 'universities.html')

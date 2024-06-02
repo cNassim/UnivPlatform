@@ -17,10 +17,14 @@
     <div class="container">
         <h1>Bienvenue à la Gestion des Inscriptions des Étudiants</h1>
         <h2>Informations de l'Agent</h2>
-        <p>Nom : {{ agent.nom }}</p>
-        <p>Prénom : {{ agent.prenom }}</p>
-        <p>Email : {{ agent.email }}</p>
-        <p>Téléphone : {{ agent.telephone }}</p>
+        {% for agent in agents %}
+            {% if agent.Email == user.email%}
+                <p>Nom : {{ agent.Nom}}</p>
+                <p>Prénom : {{ agent.Prenom}}</p>
+                <p>Email : {{ agent.Email }}</p>
+                <p>Téléphone : {{ agent.Telephone }}</p>
+            {% endif %}
+        {% endfor %}
     </div>
 </body>
 </html>

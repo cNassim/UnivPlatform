@@ -17,11 +17,13 @@
     <div class="container">
         <h1>Liste des Étudiants pour l'agent {{ agent.name }}</h1>
         <div class="student-list">
-            {% for student in students %}
-            <div class="student">
-                <p><strong>Nom de l'étudiant :</strong> {{ student.name }}</p>
-                <a href="{% url 'student-detail' student_id=student.id %}"><button>View</button></a>
-            </div>
+            {% for candidature in candidatures %}
+                {% if agent.id == candidature.agent_id %}
+                    <div class="student">
+                        <p><strong>Nom de l'étudiant :</strong> {{ candidature.Nom }}</p>
+                        <a href="#"><button>View</button></a>
+                    </div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
