@@ -12,6 +12,7 @@ from agent.views import (
 )
 
 urlpatterns = [
+ path('', views.home, name='home'),
  path('admin/', admin.site.urls),
  path('home/', views.home, name='home'),
  path('etudiant/', views.etudiant, name='etudiant'),
@@ -26,7 +27,6 @@ urlpatterns = [
  path('status',status,name='status'),
  path('univ',univ,name='univ'),
  path('agent/', include('agent.urls')),
- 
 ]
 
 

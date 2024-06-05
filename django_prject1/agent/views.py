@@ -18,7 +18,6 @@ def status(request):
         for candidature in candidatures:
             universities_and_formations = candidature.get_universities_and_formations()
             for data in universities_and_formations:
-                status_key = f'status_{candidature.id_candidature}_{data["universite"]}'
                 new_status = request.POST.get(f"status_{candidature.id_candidature}_{data['universite']}")
                 if new_status and new_status != data['status']:
                     # Update the status in the candidature object

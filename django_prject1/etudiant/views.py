@@ -50,15 +50,28 @@ def candidature(request):
         # Get the currently logged-in user
         user = request.user
 
-        # Find an available agent
+        # Find all agents
         all_agents = Agent.objects.all()
-        assigned_agents = Candidature.objects.values_list('id_agent', flat=True)
-        available_agents = all_agents.exclude(id_agent__in=assigned_agents)
 
-        if available_agents.exists():
-            id_agent = available_agents.first().id_agent
+        # Find agents who have at least one candidature
+        agents_with_candidatures = Candidature.objects.values('id_agent').annotate(candidature_count=Count('id_agent'))
+
+        # Create a dictionary to store the number of candidatures per agent
+        agent_candidature_count = {agent.id_agent: 0 for agent in all_agents}
+        for agent in agents_with_candidatures:
+            agent_candidature_count[agent['id_agent']] = agent['candidature_count']
+
+        # Find agents with no candidatures
+        available_agents = [agent for agent in all_agents if agent_candidature_count[agent.id_agent] == 0]
+
+        if available_agents:
+        # Assign to an agent with no candidatures
+            id_agent = available_agents[0].id_agent
         else:
-            id_agent = None  # Handle the case when no agents are available
+            # Sort agents by the number of candidatures they have
+            sorted_agents = sorted(agent_candidature_count.items(), key=lambda x: x[1])
+            # Get the agent with the least number of candidatures
+            id_agent = sorted_agents[0][0]
 
         # Create a new Candidature instance with the provided data and user information
         new_candidature = Candidature(
