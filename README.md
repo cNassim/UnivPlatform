@@ -22,6 +22,7 @@ UnivPlatform is a comprehensive web application designed to streamline universit
 ## Technologies Used
 
 - **Python**: Backend logic and API development
+- **Django**: Web framework for backend development
 - **JavaScript**: Frontend interactivity
 - **CSS/SCSS/Less**: Styling and layout
 - **HTML**: Structure of web pages
@@ -40,8 +41,9 @@ UnivPlatform is a comprehensive web application designed to streamline universit
    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
    ```
 
-3. Install the dependencies:
+3. Install Django and other dependencies:
    ```bash
+   pip install django
    pip install -r requirements.txt
    npm install
    ```
